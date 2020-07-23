@@ -1,6 +1,0 @@
----
-- name: Parse CSV To YAML
-  template:
-    src: "./yml-template.j2"
-    dest: "./config_variables.yml"
-  run_once: true
