@@ -7,24 +7,24 @@
   vars:
     csvfile: "{{ lookup('file', 'testcsv.csv') }}"
   
-#  vars_prompt:
-#    - name: "user"
-#      prompt: "Enter vCenter Username:"
-#      private: no
-#      default: "administrator@vsphere.local"
-#    - name: "password"
-#      prompt: "Enter vCenter User Password:"
-#      private: yes
- 
   tasks: 
-  - include: csv-to-yml.yml 
+  - name: Parse CSV To YAML
+    template:
+      src: "./variable-template.j2"
+      dest: "./config_variables.yml"
+    run_once: true
 
   - include_vars: config_variables.yml
 
-  - name: generate leaf config
+  - name: Create Directory for configurations
+    file:
+      path: ./device_configs
+      state: directory
+
+  - name: Generate Device Configurations
     template: 
-      src=config_template.j2
-      dest={{ item.switch.hostname }}.cfg
+      src: "./config_template.j2"
+      dest: "./device_configs/{{ item.switch.hostname }}.cfg"
     delegate_to: localhost
     with_items: "{{ devices }}"
 
