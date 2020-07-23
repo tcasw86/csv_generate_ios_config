@@ -28,7 +28,7 @@
     delegate_to: localhost
     with_items: "{{ devices }}"
 
-#  - name: Remove Inventory YML File (inv.yml) on playbook completion
-#    file:
-#      path: config_variables.yml
-#     state: absent
+  - name: Remove Inventory YML File (inv.yml) on playbook completion
+    file:
+     path: config_variables.yml
+     state: absent
