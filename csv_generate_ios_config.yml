@@ -1,5 +1,5 @@
 ---
-- name: Create VM Guest using linux Template
+- name: Create .cfg files for IOS devices from CSV
   hosts: localhost
   gather_facts: False
   connection: local
