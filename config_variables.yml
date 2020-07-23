@@ -1,0 +1,16 @@
+---
+devices:
+
+  - switch: 
+      hostname: 'router1'
+      interface: 'G0/1'
+      interface_ip: '192.168.10.1'
+      interface_mask: '255.255.255.252'
+      inteface_description: 'To RTR-2'
+
+  - switch: 
+      hostname: 'router2'
+      interface: 'G0/2'
+      interface_ip: '192.168.10.2'
+      interface_mask: '255.255.255.252'
+      inteface_description: 'To RTR-1'

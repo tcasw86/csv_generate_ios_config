@@ -1,0 +1,34 @@
+---
+- name: Create VM Guest using linux Template
+  hosts: localhost
+  gather_facts: False
+  connection: local
+  
+  vars:
+    csvfile: "{{ lookup('file', 'testcsv.csv') }}"
+  
+#  vars_prompt:
+#    - name: "user"
+#      prompt: "Enter vCenter Username:"
+#      private: no
+#      default: "administrator@vsphere.local"
+#    - name: "password"
+#      prompt: "Enter vCenter User Password:"
+#      private: yes
+ 
+  tasks: 
+  - include: csv-to-yml.yml 
+
+  - include_vars: config_variables.yml
+
+  - name: generate leaf config
+    template: 
+      src=config_template.j2
+      dest={{ item.switch.hostname }}.cfg
+    delegate_to: localhost
+    with_items: "{{ devices }}"
+
+#  - name: Remove Inventory YML File (inv.yml) on playbook completion
+#    file:
+#      path: config_variables.yml
+#     state: absent
