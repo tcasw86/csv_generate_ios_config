@@ -5,7 +5,7 @@
   connection: local
   
   vars:
-    csvfile: "{{ lookup('file', 'testcsv.csv') }}"
+    csvfile: "{{ lookup('file', 'device_variables.csv') }}"
   
   tasks: 
   - name: Parse CSV To YAML
