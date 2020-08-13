@@ -10,7 +10,7 @@
   tasks: 
   - name: Parse CSV To YAML
     template:
-      src: "./variable-template.j2"
+      src: "./templates/variable-template.j2"
       dest: "./config_variables.yml"
     run_once: true
 
@@ -23,7 +23,7 @@
 
   - name: Generate Device Configurations
     template: 
-      src: "./config_template.j2"
+      src: "./templates/config_template.j2"
       dest: "./device_configs/{{ item.switch.hostname }}.cfg"
     delegate_to: localhost
     with_items: "{{ devices }}"
